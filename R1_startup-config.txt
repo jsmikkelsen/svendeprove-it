@@ -1,0 +1,98 @@
+!
+version 15.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname R1
+!
+!
+!
+!
+!
+!
+!
+!
+no ip cef
+no ipv6 cef
+!
+!
+!
+!
+license udi pid CISCO2901/K9 sn FTX152464J6-
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/3/0
+ no ip address
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan20
+ description server
+ mac-address 0060.5c24.bd01
+ ip address 10.10.20.1 255.255.255.0
+!
+interface Vlan30
+ description klienter
+ mac-address 0060.5c24.bd02
+ no ip address
+!
+interface Vlan50
+ description mgmt
+ mac-address 0060.5c24.bd03
+ ip address 10.10.50.1 255.255.255.0
+!
+interface Vlan99
+ description blackhole
+ mac-address 0060.5c24.bd04
+ no ip address
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+
