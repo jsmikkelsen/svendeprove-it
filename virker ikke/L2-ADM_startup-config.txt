@@ -146,19 +146,45 @@ interface Vlan1
 !
 interface Vlan20
  description server
- ip address 10.10.20.1 255.255.255.0
+ ip address 10.10.20.2 255.255.255.0
+ standby 1 ip 10.10.20.1
+ standby 1 priority 110
+ standby 1 preempt
+ standby 20 priority 110
+ standby 20 preempt
 !
 interface Vlan30
  description klienter
- no ip address
+ ip address 10.10.30.2 255.255.255.0
+ standby 2 ip 10.10.30.1
+ standby 2 priority 110
+ standby 2 preempt
+ standby 30 priority 110
+ standby 30 preempt
 !
 interface Vlan50
  description mgmt
- ip address 10.10.50.4 255.255.255.0
+ ip address 10.10.50.2 255.255.255.0
+ standby 3 ip 10.10.50.1
+ standby 3 priority 110
+ standby 3 preempt
+ standby 50 priority 110
+ standby 50 preempt
 !
 interface Vlan99
  description blackhole
  no ip address
+ shutdown
+!
+router ospf 1
+ network 10.10.10.0 0.0.0.255 area 0
+ network 10.10.20.0 0.0.0.255 area 0
+ network 10.10.30.0 0.0.0.255 area 0
+ network 10.10.50.0 0.0.0.255 area 0
+ network 10.10.200.0 0.0.0.255 area 0
+ network 10.10.201.0 0.0.0.255 area 0
+ network 10.10.202.0 0.0.0.255 area 0
+ network 10.10.203.0 0.0.0.255 area 0
 !
 !
 !

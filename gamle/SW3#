@@ -1,0 +1,159 @@
+SW3#
+
+sh run
+Building configuration...
+
+Current configuration : 3445 bytes
+!
+version 15.0
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname SW3
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+system mtu routing 1500
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-4093828608
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-4093828608
+ revocation-check none
+ rsakeypair TP-self-signed-4093828608
+!
+!
+crypto pki certificate chain TP-self-signed-4093828608
+ certificate self-signed 01
+  3082022B 30820194 A0030201 02020101 300D0609 2A864886 F70D0101 05050030
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274
+  69666963 6174652D 34303933 38323836 3038301E 170D3933 30333031 30303031
+  30345A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D34 30393338
+  32383630 3830819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281
+  8100AE85 9D391989 B6511612 E1DD957E 260D8D79 BA547E2F D5A06FEA AF65B984
+  AB87AE43 28B3302B E69D0651 D6171321 1103E0BD 31D139C3 C64476DF 795B25D1
+  3E2D33B4 8129FF30 A54CAF0A 4D2EC30F 245A4220 9CC8C33E 338CB3C6 F1F9B939
+  FA1B4E31 CBB972C8 4C58C8F8 47AFAF6F C06D3224 E5C94643 86B86564 07C67CB0
+  F4A70203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 301F0603
+  551D2304 18301680 14053AB9 1D62C062 684116ED 708EBE0C C4D67BFC F4301D06
+  03551D0E 04160414 053AB91D 62C06268 4116ED70 8EBE0CC4 D67BFCF4 300D0609
+  2A864886 F70D0101 05050003 81810086 4CC9918A C330C83E 093304A6 1E12275B
+  2DE7D2AB 94BDF121 EE73BA2A 355FB2E3 F1AF4137 A3EB0277 B0208A88 9AD6BBAC
+  D99215B6 E2B5A2D2 64E0F5F0 28FE8687 7BEA6CC0 8D8B6806 C4BF6D3F B3187721
+  4B586213 110FF31E C66D4823 3522252D EB72DA91 25D612B9 04D850BE 72025418
+  2654B069 F386144D 5080E20D 35527A
+        quit
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+!
+!
+!
+!
+!
+interface Port-channel1
+ description "Ether-channel for VLAN 30,40"
+ switchport trunk allowed vlan 30,40
+ switchport mode trunk
+!
+interface FastEthernet0/1
+ description "Trunk Vlan 40"
+ switchport trunk allowed vlan 30,40
+ switchport mode trunk
+!
+interface FastEthernet0/2
+ description "Trunk til Vlan30"
+ switchport trunk allowed vlan 30,40
+ switchport mode trunk
+!
+interface FastEthernet0/3
+!
+interface FastEthernet0/4
+!
+interface FastEthernet0/5
+!
+interface FastEthernet0/6
+!
+interface FastEthernet0/7
+!
+interface FastEthernet0/8
+!
+interface FastEthernet0/9
+!
+interface FastEthernet0/10
+!
+interface FastEthernet0/11
+!
+interface FastEthernet0/12
+!
+interface FastEthernet0/13
+ description "Ether-channel"
+ switchport trunk allowed vlan 30,40
+ switchport mode trunk
+ channel-group 1 mode on
+!
+interface FastEthernet0/14
+ description "Ether-channel"
+ switchport trunk allowed vlan 30,40
+ switchport mode trunk
+ channel-group 1 mode on
+!
+interface FastEthernet0/15
+!
+interface FastEthernet0/16
+!
+interface FastEthernet0/17
+!
+interface FastEthernet0/18
+!
+interface FastEthernet0/19
+!
+interface FastEthernet0/20
+!
+interface FastEthernet0/21
+!
+interface FastEthernet0/22
+!
+interface FastEthernet0/23
+!
+interface FastEthernet0/24
+!
+interface GigabitEthernet0/1
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+ no ip address
+!
+interface Vlan30
+ no ip address
+!
+interface Vlan40
+ no ip address
+!
+ip http server
+ip http secure-server
+!
+!
+line con 0
+line vty 0 4
+ login
+line vty 5 15
+ login
+!
+end

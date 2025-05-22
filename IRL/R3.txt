@@ -1,0 +1,100 @@
+version 15.3
+no service timestamps debug uptime
+no service timestamps log uptime
+no service password-encryption
+!
+hostname R3
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+no ip cef
+no ipv6 cef
+multilink bundle-name authenticated
+!
+!
+!
+!
+license udi pid CISCO2901/K9 sn FCZ1545C57P
+!
+!
+!
+redundancy
+!
+!
+!
+!
+!
+!
+interface Embedded-Service-Engine0/0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet0/0
+ ip address 192.168.13.2 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+interface Serial0/0/0
+ ip address 192.168.11.2 255.255.255.0
+!
+interface Serial0/0/1
+ no ip address
+ shutdown
+ clock rate 2000000
+!
+!
+router ospf 1
+ router-id 3.3.3.3
+ network 192.168.11.0 0.0.0.255 area 0
+ network 192.168.13.0 0.0.0.255 area 0
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+ip flow-export version 9
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+line con 0
+line aux 0
+line 2
+ no activation-character
+ no exec
+ transport preferred none
+ transport output lat pad telnet rlogin lapb-ta mop udptn v120 ssh
+ stopbits 1
+line vty 0 4
+ login
+ transport input all
+!
+scheduler allocate 20000 1000
+!
+end

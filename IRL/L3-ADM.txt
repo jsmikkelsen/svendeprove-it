@@ -1,0 +1,263 @@
+ version 15.0
+no service pad
+no service timestamps debug uptime
+no service timestamps log uptime
+no service password-encryption
+!
+hostname L3-ADM
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+username admin privilege 15 secret 5 $1$cK8e$XfO593dKD76uX7PkidSTc0
+no aaa new-model
+system mtu routing 1500
+ip routing
+no ip domain-lookup
+ip domain-name BBB.dk
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+ip ssh version 2
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Port-channel1
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 20,30,50
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface GigabitEthernet0/1
+ shutdown
+!
+interface GigabitEthernet0/2
+ shutdown
+!
+interface GigabitEthernet0/3
+ shutdown
+!
+interface GigabitEthernet0/4
+ shutdown
+!
+interface GigabitEthernet0/5
+ shutdown
+!
+interface GigabitEthernet0/6
+ shutdown
+!
+interface GigabitEthernet0/7
+ shutdown
+!
+interface GigabitEthernet0/8
+ shutdown
+!
+interface GigabitEthernet0/9
+ shutdown
+!
+interface GigabitEthernet0/10
+ shutdown
+!
+interface GigabitEthernet0/11
+ shutdown
+!
+interface GigabitEthernet0/12
+ shutdown
+!
+interface GigabitEthernet0/13
+ shutdown
+!
+interface GigabitEthernet0/14
+ shutdown
+!
+interface GigabitEthernet0/15
+ shutdown
+!
+interface GigabitEthernet0/16
+ shutdown
+!
+interface GigabitEthernet0/17
+ shutdown
+!
+interface GigabitEthernet0/18
+ shutdown
+!
+interface GigabitEthernet0/19
+ shutdown
+!
+interface GigabitEthernet0/20
+ shutdown
+!
+interface GigabitEthernet0/21
+ shutdown
+!
+interface GigabitEthernet0/22
+ shutdown
+!
+interface GigabitEthernet0/23
+ shutdown
+!
+interface GigabitEthernet0/24
+ shutdown
+!
+interface GigabitEthernet0/25
+ shutdown
+!
+interface GigabitEthernet0/26
+ shutdown
+!
+interface GigabitEthernet0/27
+ shutdown
+!
+interface GigabitEthernet0/28
+ shutdown
+!
+interface GigabitEthernet0/29
+ shutdown
+!
+interface GigabitEthernet0/30
+ shutdown
+!
+interface GigabitEthernet0/31
+ shutdown
+!
+interface GigabitEthernet0/32
+ shutdown
+!
+interface GigabitEthernet0/33
+ shutdown
+!
+interface GigabitEthernet0/34
+ shutdown
+!
+interface GigabitEthernet0/35
+ shutdown
+!
+interface GigabitEthernet0/36
+ shutdown
+!
+interface GigabitEthernet0/37
+ shutdown
+!
+interface GigabitEthernet0/38
+ shutdown
+!
+interface GigabitEthernet0/39
+ shutdown
+!
+interface GigabitEthernet0/40
+ shutdown
+!
+interface GigabitEthernet0/41
+ shutdown
+!
+interface GigabitEthernet0/42
+ shutdown
+!
+interface GigabitEthernet0/43
+ shutdown
+!
+interface GigabitEthernet0/44
+ shutdown
+!
+interface GigabitEthernet0/45
+ shutdown
+!
+interface GigabitEthernet0/46
+!
+interface GigabitEthernet0/47
+ description "Portchannel"
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 20,30,50
+ switchport mode trunk
+ switchport nonegotiate
+ channel-group 1 mode active
+!
+interface GigabitEthernet0/48
+ description "Portchannel"
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 20,30,50
+ switchport mode trunk
+ switchport nonegotiate
+ channel-group 1 mode active
+!
+interface GigabitEthernet0/49
+ no switchport
+ ip address 192.168.12.1 255.255.255.0
+!
+interface GigabitEthernet0/50
+!
+interface GigabitEthernet0/51
+!
+interface GigabitEthernet0/52
+!
+interface Vlan1
+ no ip address
+!
+interface Vlan20
+ description server
+ ip address 192.168.20.2 255.255.255.0
+!
+interface Vlan30
+ description klienter
+ ip address 192.168.30.2 255.255.255.0
+ ip helper-address 192.168.20.20
+!
+interface Vlan50
+ description mgmt
+ ip address 192.168.50.5 255.255.255.0
+!
+interface Vlan99
+ description blackhole
+ no ip address
+ shutdown
+!
+router ospf 1
+ router-id 4.4.4.4
+ network 192.168.12.0 0.0.0.255 area 0
+ network 192.168.20.0 0.0.0.255 area 0
+ network 192.168.30.0 0.0.0.255 area 0
+!
+ip http server
+ip http secure-server
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+line con 0
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 15
+ login
+!
+end

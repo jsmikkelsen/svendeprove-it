@@ -1,0 +1,221 @@
+SW4#
+
+sh run
+Building configuration...
+
+Current configuration : 4368 bytes
+!
+version 15.0
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname SW4
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+system mtu routing 1500
+!
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-3815482880
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-3815482880
+ revocation-check none
+ rsakeypair TP-self-signed-3815482880
+!
+!
+crypto pki certificate chain TP-self-signed-3815482880
+ certificate self-signed 01
+  3082022B 30820194 A0030201 02020101 300D0609 2A864886 F70D0101 05050030
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274
+  69666963 6174652D 33383135 34383238 3830301E 170D3933 30333031 30303033
+  30355A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D33 38313534
+  38323838 3030819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281
+  8100C336 6B1F5989 48334CCA 52B1ACD9 8E1FE766 FEF212C8 CF76087D D6BDBD77
+  EE1BA95C C323D508 1E503500 8FEF4680 9A1983BD 4F4AC17A 2538D45E C1F72AE9
+  0946091E F2C109D6 A8F62F9D 53DA047E 2A1A64FC 463029DB 9C1D518C 304DD77E
+  E5EE568A 5489F7C2 949AFEF4 D7C78E9D A7FF201F DBD076BB 523C1EC1 00885EAD
+  39B10203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 301F0603
+  551D2304 18301680 1450CB06 8C9CD380 0481D38B CC3A2A05 59317894 4A301D06
+  03551D0E 04160414 50CB068C 9CD38004 81D38BCC 3A2A0559 3178944A 300D0609
+  2A864886 F70D0101 05050003 8181005C 95132C97 00F771EB 78F72317 0ED21F7F
+  CC4E0A73 FFADA9FF C934C805 60F82870 417E72D3 6DFCCAB5 DD128317 825466A7
+  2D825715 CC0843C0 35BC9367 AA1B2495 8DF28A30 96743304 058F7040 AD02F2F4
+  C9B6910C 6EC088A8 0CE1AC33 87E6A772 6B284AF4 CB2E9DFB 49ACAEBA B1E4FE82
+  DF51EA66 D60A95EC 0D5D2E84 812201
+        quit
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Port-channel1
+ description "Ether-channel for VLAN 30,40"
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 30,40
+ switchport mode trunk
+!
+interface GigabitEthernet0/1
+ description Ether-channel
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 30,40
+ switchport mode trunk
+ channel-group 1 mode on
+!
+interface GigabitEthernet0/2
+ description Ether-channel
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 30,40
+ switchport mode trunk
+ channel-group 1 mode on
+!
+interface GigabitEthernet0/3
+!
+interface GigabitEthernet0/4
+!
+interface GigabitEthernet0/5
+!
+interface GigabitEthernet0/6
+!
+interface GigabitEthernet0/7
+!
+interface GigabitEthernet0/8
+!
+interface GigabitEthernet0/9
+!
+interface GigabitEthernet0/10
+!
+interface GigabitEthernet0/11
+!
+interface GigabitEthernet0/12
+!
+interface GigabitEthernet0/13
+!
+interface GigabitEthernet0/14
+!
+interface GigabitEthernet0/15
+!
+interface GigabitEthernet0/16
+!
+interface GigabitEthernet0/17
+ description "Link til R2"
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 30,40
+ switchport mode trunk
+!
+interface GigabitEthernet0/18
+!
+interface GigabitEthernet0/19
+!
+interface GigabitEthernet0/20
+!
+interface GigabitEthernet0/21
+!
+interface GigabitEthernet0/22
+!
+interface GigabitEthernet0/23
+!
+interface GigabitEthernet0/24
+!
+interface GigabitEthernet0/25
+!
+interface GigabitEthernet0/26
+!
+interface GigabitEthernet0/27
+!
+interface GigabitEthernet0/28
+!
+interface GigabitEthernet0/29
+!
+interface GigabitEthernet0/30
+!
+interface GigabitEthernet0/31
+!
+interface GigabitEthernet0/32
+!
+interface GigabitEthernet0/33
+!
+interface GigabitEthernet0/34
+!
+interface GigabitEthernet0/35
+!
+interface GigabitEthernet0/36
+!
+interface GigabitEthernet0/37
+!
+interface GigabitEthernet0/38
+!
+interface GigabitEthernet0/39
+!
+interface GigabitEthernet0/40
+!
+interface GigabitEthernet0/41
+!
+interface GigabitEthernet0/42
+!
+interface GigabitEthernet0/43
+!
+interface GigabitEthernet0/44
+!
+interface GigabitEthernet0/45
+!
+interface GigabitEthernet0/46
+!
+interface GigabitEthernet0/47
+!
+interface GigabitEthernet0/48
+!
+interface GigabitEthernet0/49
+!
+interface GigabitEthernet0/50
+!
+interface GigabitEthernet0/51
+!
+interface GigabitEthernet0/52
+!
+interface Vlan1
+ no ip address
+!
+ip http server
+ip http secure-server
+!
+!
+!
+!
+!
+!
+line con 0
+line vty 0 4
+ login
+line vty 5 15
+ login
+!
+end
