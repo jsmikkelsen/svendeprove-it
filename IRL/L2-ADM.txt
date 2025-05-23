@@ -117,8 +117,10 @@ interface FastEthernet0/12
  spanning-tree bpduguard enable
 !
 interface FastEthernet0/13
+ switchport access vlan 50
  switchport mode access
  switchport port-security maximum 2
+ spanning-tree portfast
  spanning-tree bpduguard enable
 !
 interface FastEthernet0/14
@@ -193,8 +195,14 @@ interface Vlan20
  description server
  no ip address
 !
+interface Vlan21
+ no ip address
+!
 interface Vlan30
  description klienter
+ no ip address
+!
+interface Vlan31
  no ip address
 !
 interface Vlan50

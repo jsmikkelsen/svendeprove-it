@@ -10,10 +10,13 @@ boot-start-marker
 boot-end-marker
 !
 !
+username admin privilege 15 secret 5 $1$E2U.$V/GdHen5uUMfLCAUXRKPp.
 no aaa new-model
 system mtu routing 1500
 !
 !
+no ip domain-lookup
+ip domain-name BBB.dk
 !
 !
 !
@@ -27,19 +30,22 @@ spanning-tree extend system-id
 !
 vlan internal allocation policy ascending
 !
+ip ssh version 2
 !
 !
 !
 !
 !
 interface Port-channel2
- switchport trunk allowed vlan 20,30,50
+ switchport trunk allowed vlan 20,21,30,31,50
  switchport mode trunk
  switchport nonegotiate
 !
 interface FastEthernet0/1
+ switchport access vlan 21
  switchport mode access
  switchport port-security maximum 2
+ spanning-tree portfast
  spanning-tree bpduguard enable
 !
 interface FastEthernet0/2
@@ -150,7 +156,7 @@ interface FastEthernet0/22
 !
 interface FastEthernet0/23
  description "Portchannel"
- switchport trunk allowed vlan 20,30,50
+ switchport trunk allowed vlan 20,21,30,31,50
  switchport mode trunk
  switchport nonegotiate
  channel-protocol pagp
@@ -158,7 +164,7 @@ interface FastEthernet0/23
 !
 interface FastEthernet0/24
  description "Portchannel"
- switchport trunk allowed vlan 20,30,50
+ switchport trunk allowed vlan 20,21,30,31,50
  switchport mode trunk
  switchport nonegotiate
  channel-protocol pagp
@@ -176,13 +182,19 @@ interface Vlan20
  description server
  no ip address
 !
+interface Vlan21
+ no ip address
+!
 interface Vlan30
  description klienter
  no ip address
 !
+interface Vlan31
+ no ip address
+!
 interface Vlan50
  description mgmt
- ip address 192.168.50.1 255.255.255.0
+ ip address 192.168.50.8 255.255.255.0
 !
 interface Vlan99
  description blackhole
@@ -194,7 +206,8 @@ ip http secure-server
 !
 line con 0
 line vty 0 4
- login
+ login local
+ transport input ssh
 line vty 5 15
  login
 !

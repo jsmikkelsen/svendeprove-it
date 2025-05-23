@@ -82,11 +82,10 @@ interface GigabitEthernet0/1
  speed auto
 !
 interface Serial0/0/0
- bandwidth 10000000
  ip address 192.168.10.1 255.255.255.0
  ip nat inside
  ip virtual-reassembly in
- clock rate 8000000
+ clock rate 2000000
 !
 interface Serial0/0/1
  bandwidth 10000000
@@ -115,6 +114,8 @@ ip access-list standard nat-liste
  permit 192.168.30.0 0.0.0.255
  permit 192.168.20.0 0.0.0.255
  permit 192.168.50.0 0.0.0.255
+ permit 192.168.31.0 0.0.0.255
+ permit 192.168.21.0 0.0.0.255
  deny   any
 !
 !

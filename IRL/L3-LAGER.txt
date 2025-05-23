@@ -11,9 +11,12 @@ boot-end-marker
 !
 !
 !
+username admin privilege 15 secret 5 $1$ev4K$DQrmgrW6Bqtc1JyipJBIj1
 no aaa new-model
 system mtu routing 1500
 ip routing
+no ip domain-lookup
+ip domain-name BBB.dk
 !
 !
 !
@@ -30,6 +33,7 @@ spanning-tree extend system-id
 !
 vlan internal allocation policy ascending
 !
+ip ssh version 2
 !
 !
 !
@@ -46,7 +50,7 @@ vlan internal allocation policy ascending
 !
 interface Port-channel2
  switchport trunk encapsulation dot1q
- switchport trunk allowed vlan 20,30,50
+ switchport trunk allowed vlan 20,21,30,31,50
  switchport mode trunk
  switchport nonegotiate
 !
@@ -145,7 +149,7 @@ interface GigabitEthernet0/46
 interface GigabitEthernet0/47
  description "Portchannel"
  switchport trunk encapsulation dot1q
- switchport trunk allowed vlan 20,30,50
+ switchport trunk allowed vlan 20,21,30,31,50
  switchport mode trunk
  switchport nonegotiate
  channel-protocol pagp
@@ -154,7 +158,7 @@ interface GigabitEthernet0/47
 interface GigabitEthernet0/48
  description "Portchannel"
  switchport trunk encapsulation dot1q
- switchport trunk allowed vlan 20,30,50
+ switchport trunk allowed vlan 20,21,30,31,50
  switchport mode trunk
  switchport nonegotiate
  channel-protocol pagp
@@ -174,12 +178,18 @@ interface Vlan1
  no ip address
  shutdown
 !
+interface Vlan20
+ no ip address
+!
+interface Vlan21
+ ip address 192.168.21.1 255.255.255.0
+!
+interface Vlan31
+ ip address 192.168.31.1 255.255.255.0
+!
 interface Vlan50
  description mgmt
- ip address 192.168.50.2 255.255.255.0
- standby 3 ip 10.10.50.1
- standby 3 preempt
- standby 50 preempt
+ ip address 192.168.50.6 255.255.255.0
 !
 interface Vlan99
  description blackhole
@@ -188,6 +198,8 @@ interface Vlan99
 !
 router ospf 1
  network 192.168.13.0 0.0.0.255 area 0
+ network 192.168.21.0 0.0.0.255 area 0
+ network 192.168.31.0 0.0.0.255 area 0
  network 192.168.50.0 0.0.0.255 area 0
 !
 ip http server
@@ -195,15 +207,14 @@ ip http secure-server
 !
 ip flow-export version 9
 !
-ip route 0.0.0.0 0.0.0.0 10.10.201.1
-ip route 10.10.99.0 255.255.255.0 Null0
 !
 !
 !
 !
 line con 0
 line vty 0 4
- login
+ login local
+ transport input ssh
 line vty 5 15
  login
 !
