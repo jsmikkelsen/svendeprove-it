@@ -1,0 +1,316 @@
+version 15.0
+no service pad
+no service timestamps debug uptime
+no service timestamps log uptime
+no service password-encryption
+!
+hostname L2-ADM
+!
+boot-start-marker
+boot-end-marker
+!
+!
+username admin privilege 15 secret 5 $1$TQcb$tMI9.WW6LL8Sv3ziMEKto.
+no aaa new-model
+system mtu routing 1500
+!
+!
+no ip domain-lookup
+ip domain-name BBB.dk
+!
+!
+crypto pki trustpoint TP-self-signed-3574359808
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-3574359808
+ revocation-check none
+ rsakeypair TP-self-signed-3574359808
+!
+!
+crypto pki certificate chain TP-self-signed-3574359808
+ certificate self-signed 01
+  3082022B 30820194 A0030201 02020101 300D0609 2A864886 F70D0101 05050030
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274
+  69666963 6174652D 33353734 33353938 3038301E 170D3933 30333031 30303031
+  30305A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D33 35373433
+  35393830 3830819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281
+  8100D83C 94D26EA1 DC27CB4A 70A85289 14606B51 92477D86 0B760E8C 9F489041
+  0D97341C 9D631585 8EFFC7E4 A431D0BB 5179EFD6 BCCF3F2A F3E97275 E34AD994
+  F305A9EB 14913F8F 1A3080A3 22B6E5D7 B98E9B8D B2CF0487 01EBD81B 95DCBC25
+  DD732720 4CA27BF7 C9E60AC4 5CF592D6 6055C6E3 DF7D46B1 6539E1F3 6F529F5B
+  3E7D0203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 301F0603
+  551D2304 18301680 14818322 C870066B A38FD540 7EB49212 EE3C67A8 D8301D06
+  03551D0E 04160414 818322C8 70066BA3 8FD5407E B49212EE 3C67A8D8 300D0609
+  2A864886 F70D0101 05050003 81810031 38FA8DC3 6E09D1C0 E6BCFB85 BEE3BDD7
+  0AB1A7BD 6A9D6B79 84CA4B63 1FB157F6 E756B51B FD541879 8B6FE1EB FB8BD4E4
+  5127CD32 B5F47FB5 AAE1FEB2 04EB33AD 151C8C3A B3E59115 6D0E7B17 7B7E40BF
+  04994535 7D7319AF 3FA17176 6AAA8CC2 B8D8BC89 77AE2B97 48FD6751 AFC9DEA2
+  639686B4 CA683EAA 724C5537 551FF9
+        quit
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+ip ssh version 2
+!
+!
+!
+!
+!
+interface Port-channel1
+ switchport trunk allowed vlan 20,21,30,31,50
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface FastEthernet0/1
+ switchport access vlan 30
+ switchport mode access
+ switchport port-security maximum 2
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/2
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security maximum 2
+ shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/3
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security maximum 2
+ shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/4
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security maximum 2
+ shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/5
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security maximum 2
+ shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/6
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security maximum 2
+ shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/7
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security maximum 2
+ shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/8
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security maximum 2
+ shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/9
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security maximum 2
+ shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/10
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security maximum 2
+ shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/11
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security maximum 2
+ shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/12
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security maximum 2
+ shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/13
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security maximum 2
+ shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/14
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security maximum 2
+ shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/15
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security maximum 2
+ shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/16
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security maximum 2
+ shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/17
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security maximum 2
+ shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/18
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security maximum 2
+ shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/19
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security maximum 2
+ shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/20
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security maximum 2
+ shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/21
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security maximum 2
+ shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/22
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security maximum 2
+ shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/23
+ description "Portchannel"
+ switchport trunk allowed vlan 20,21,30,31,50
+ switchport mode trunk
+ switchport nonegotiate
+ channel-group 1 mode active
+!
+interface FastEthernet0/24
+ description "Portchannel"
+ switchport trunk allowed vlan 20,21,30,31,50
+ switchport mode trunk
+ switchport nonegotiate
+ channel-group 1 mode active
+!
+interface GigabitEthernet0/1
+ switchport access vlan 99
+ switchport mode access
+ shutdown
+ spanning-tree portfast
+!
+interface GigabitEthernet0/2
+ switchport access vlan 20
+ switchport mode access
+ switchport port-security maximum 2
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan20
+ description server
+ no ip address
+!
+interface Vlan21
+ no ip address
+!
+interface Vlan30
+ description klienter
+ no ip address
+!
+interface Vlan31
+ no ip address
+!
+interface Vlan50
+ description mgmt
+ ip address 192.168.50.7 255.255.255.0
+!
+interface Vlan99
+ description blackhole
+ no ip address
+!
+ip http server
+ip http secure-server
+!
+ip access-list extended ssh_access
+ permit tcp host 192.168.20.25 any eq 22
+!
+!
+line con 0
+line vty 0 4
+ access-class ssh_access in
+ login local
+ transport input ssh
+line vty 5 15
+ access-class ssh_access in
+ login
+ transport input ssh
+!
+end
