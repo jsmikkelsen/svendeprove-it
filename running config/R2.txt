@@ -1,9 +1,9 @@
-version 15.6
+version 15.3
 no service timestamps debug uptime
 no service timestamps log uptime
 no service password-encryption
 !
-hostname R1
+hostname R2
 !
 boot-start-marker
 boot-end-marker
@@ -11,25 +11,9 @@ boot-end-marker
 !
 !
 no aaa new-model
-ethernet lmi ce
 !
 !
 !
-!
-!
-!
-!
-!
-!
-!
-!
-!
-!
-!
-!
-!
-
-
 !
 !
 !
@@ -38,30 +22,20 @@ no ip domain lookup
 ip domain name BBB.dk
 no ip cef
 no ipv6 cef
-!
 multilink bundle-name authenticated
 !
 !
 !
 !
+license udi pid CISCO2901/K9 sn FGL152221HU
 !
-license udi pid CISCO2901/K9 sn FCZ1548921H
 !
-!
-username admin privilege 15 secret 5 $1$EmgR$ApfghT1nnSoEDq0tCxyFV.
+username admin privilege 15 secret 5 $1$RyE1$j.PsZcpzRNJ5fWtBfTqeo.
 !
 redundancy
 !
 !
-!
-!
-!
-!
-!
-!
-!
-!
-!
+ip ssh version 2
 !
 !
 !
@@ -71,11 +45,8 @@ interface Embedded-Service-Engine0/0
  shutdown
 !
 interface GigabitEthernet0/0
- description WAN
- ip address dhcp
- ip access-group WEB in
- ip nat outside
- ip virtual-reassembly in
+ description link til L3-ADM port ge0/49
+ ip address 192.168.12.2 255.255.255.0
  duplex auto
  speed auto
 !
@@ -86,26 +57,18 @@ interface GigabitEthernet0/1
  speed auto
 !
 interface Serial0/0/0
- description link til R2 port Serial0/0/0
- ip address 192.168.10.1 255.255.255.0
- ip nat inside
- ip virtual-reassembly in
- clock rate 2000000
+ description link til R1 port Serial0/0/0
+ bandwidth 10000000
+ ip address 192.168.10.2 255.255.255.0
 !
 interface Serial0/0/1
- description link til R3 port Serial0/0/0
- bandwidth 10000000
- ip address 192.168.11.1 255.255.255.0
- ip nat inside
- ip virtual-reassembly in
- clock rate 8000000
-!
+ no ip address
+ shutdown
 !
 router ospf 1
- router-id 1.1.1.1
+ router-id 2.2.2.2
  network 192.168.10.0 0.0.0.255 area 0
- network 192.168.11.0 0.0.0.255 area 0
- default-information originate
+ network 192.168.12.0 0.0.0.255 area 0
 !
 ip forward-protocol nd
 !
@@ -113,23 +76,7 @@ no ip http server
 no ip http secure-server
 ip flow-export version 9
 !
-ip nat inside source list nat-liste interface GigabitEthernet0/0 overload
-ip nat inside source static tcp 192.168.20.24 80 interface GigabitEthernet0/0 80
-ip nat inside source static tcp 192.168.20.26 3389 interface GigabitEthernet0/0 3389
-ip route 0.0.0.0 0.0.0.0 GigabitEthernet0/0
-ip ssh version 2
 !
-ip access-list standard nat-liste
- permit 192.168.30.0 0.0.0.255
- permit 192.168.20.0 0.0.0.255
- permit 192.168.50.0 0.0.0.255
- permit 192.168.31.0 0.0.0.255
- permit 192.168.21.0 0.0.0.255
- deny   any
-!
-ip access-list extended WEB
- permit tcp any host 192.168.20.24 eq www
- permit ip any any
 ip access-list extended ssh_access
  permit tcp host 192.168.20.25 any eq 22
 !
@@ -146,7 +93,7 @@ line 2
  no activation-character
  no exec
  transport preferred none
- transport output lat pad telnet rlogin lapb-ta mop udptn v120 ssh
+ transport output pad telnet rlogin lapb-ta mop udptn v120 ssh
  stopbits 1
 line vty 0 4
  access-class ssh_access in
@@ -158,6 +105,5 @@ line vty 5 15
  transport input ssh
 !
 scheduler allocate 20000 1000
-ntp server devicehelper.cisco.com
 !
 end
